@@ -4,7 +4,7 @@
   "description": "backend api server for swiss events",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "devStart": "nodemon server.js"
   },
   "keywords": [
     "nodejs",
@@ -13,6 +13,7 @@
   "author": "yuzusnail",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mongoose": "^7.1.0"

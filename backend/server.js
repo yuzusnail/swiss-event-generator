@@ -1,9 +1,11 @@
-require('dotenv').confit();
+require('dotenv').config();
 
 const express = require('express')
 const mongoInterface = require('mongoose');
 const app = express();
+
 const eventRouter = require('./router/event-router');
+const userRouter = require('./router/user-router');
 
 app.use(express.json())
 app.use((req, res, next) => {
@@ -13,6 +15,7 @@ app.use((req, res, next) => {
 
 //routes
 app.use('/api/events', eventRouter);
+app.use('/api/user', userRouter);
 
 mongoInterface.connect(process.env.MONGO_URI)
     .then(()=>{
