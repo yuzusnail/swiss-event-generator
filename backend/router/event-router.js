@@ -27,4 +27,12 @@ router.patch('/:event-id', (req, res) => {
     res.json({msg: "PATCH event list entry"})
 })
 
+router.post('/create-event', (req, res) => {
+    res.json({msg: "POST Create Event"})
+})
+
+router.get('/start-event/:event-id', (req,res) => {
+    res.json({msg: "Start Event with event-id"})
+})
+
 module.exports = router;
