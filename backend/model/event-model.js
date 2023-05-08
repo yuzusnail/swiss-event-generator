@@ -2,37 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const eventSchema = new Schema({
-    eventName: {
-        type: String,
-        required: true
-    },
-    entryUserList: {
-        type: [mongoose.ObjectId],
-        required: true
-    },
-    isStarted: {
-        type: Boolean,
-        required: true
-    },
-    currentRound: {
-        type: Number,
-        required: true
-    },
-    totalRound: {
-        type: Number,
-        required: true
-    },
-    startTime: {
-        type: Date
-    }
-})
-
-const roundSchema = new Schema({
-    eventId: {
-        type: eventSchema,
-        required: true
-    },
+const gameSchema = new Schema({
     primaryId: {
         type: mongoose.ObjectId,
         required: true
@@ -40,10 +10,6 @@ const roundSchema = new Schema({
     secondaryId: {
         type: mongoose.ObjectId
         // Secondary player may be NULL, due to bye
-    },
-    numRound: {
-        type: Number,
-        required: true
     },
     primaryScore: {
         type: Number,
@@ -57,9 +23,54 @@ const roundSchema = new Schema({
         type: Boolean,
         required: true
     }
+});
+
+const roundSchema = new Schema({
+    roundNumber: {
+        type: Number,
+        required: true
+    },
+    gameList: {
+        type: [gameSchema],
+        required: true
+    },
+    isFinished: {
+        type: Boolean,
+        required: true
+    }
+})
+const eventSchema = new Schema({
+    organizerId: {
+        type: mongoose.ObjectId,
+        required: true
+    },
+    eventName: {
+        type: String,
+        required: true
+    },
+    entryUserList: {
+        type: [mongoose.ObjectId],
+    },
+    roundList: {
+        type: [roundSchema],
+    },
+    isStarted: {
+        type: Boolean,
+        required: true
+    },
+    currentRound: {
+        type: Number,
+    },
+    totalRound: {
+        type: Number,
+    },
+    startTime: {
+        type: Date
+    }
 })
 
-const eventModel = mongoose.model('Event', eventSchema);
-const roundModel = mongoose.model('Round', roundSchema);
+const EventModel = mongoose.model('Event', eventSchema);
+const RoundModel = mongoose.model('Round', roundSchema);
+const GameModel = mongoose.model('Game', gameSchema);
 
-module.exports = {eventModel, roundModel};
+module.exports = {EventModel, RoundModel, GameModel};

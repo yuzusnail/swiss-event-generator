@@ -1,5 +1,10 @@
 const express = require('express')
+const requireAuth = require('../middleware/requireAuth')
+const {CreateEvent} = require('../controller/event-controller')
 const router = express.Router();
+
+
+router.use(requireAuth);
 
 // GET
 router.get('/', (req, res) => {
@@ -27,9 +32,7 @@ router.patch('/:event-id', (req, res) => {
     res.json({msg: "PATCH event list entry"})
 })
 
-router.post('/create-event', (req, res) => {
-    res.json({msg: "POST Create Event"})
-})
+router.post('/create-event', CreateEvent);
 
 router.get('/start-event/:event-id', (req,res) => {
     res.json({msg: "Start Event with event-id"})
